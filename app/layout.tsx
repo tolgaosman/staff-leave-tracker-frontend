@@ -20,6 +20,14 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "İzin Takip Sistemi",
   description: "İzin Takip Sistemi",
+  icons: {
+    icon: [
+      { url: "/staff-leave-tracker-frontend/favicon.ico", type: "image/x-icon" },
+      { url: "/staff-leave-tracker-frontend/assets/browserLogo.png", type: "image/png" }
+    ],
+    shortcut: "/staff-leave-tracker-frontend/favicon.ico",
+    apple: "/staff-leave-tracker-frontend/assets/browserLogo.png",
+  },
 };
 
 export default function RootLayout({
