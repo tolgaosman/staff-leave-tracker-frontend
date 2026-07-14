@@ -1,24 +1,43 @@
+"use client";
+
+import { useState } from "react";
+
 import { cn } from "@/lib/utils";
 
-export type ChartBar = {
+type ChartBar = {
   month: string;
   value: number;
   color: "cyan" | "violet";
 };
 
+type Dataset = "annual" | "sick";
+
 const AXIS_MAX = 40;
 const AXIS_TICKS = [40, 30, 20, 10, 0];
 
-const bars: ChartBar[] = [
-  { month: "Jan", value: 12, color: "cyan" },
-  { month: "Feb", value: 18, color: "violet" },
-  { month: "Mar", value: 8, color: "cyan" },
-  { month: "Apr", value: 24, color: "cyan" },
-  { month: "May", value: 34, color: "violet" },
-  { month: "Jun", value: 20, color: "cyan" },
-];
+const datasets: Record<Dataset, ChartBar[]> = {
+  annual: [
+    { month: "Jan", value: 12, color: "cyan" },
+    { month: "Feb", value: 18, color: "violet" },
+    { month: "Mar", value: 8, color: "cyan" },
+    { month: "Apr", value: 24, color: "cyan" },
+    { month: "May", value: 34, color: "violet" },
+    { month: "Jun", value: 20, color: "cyan" },
+  ],
+  sick: [
+    { month: "Jan", value: 6, color: "violet" },
+    { month: "Feb", value: 9, color: "cyan" },
+    { month: "Mar", value: 14, color: "violet" },
+    { month: "Apr", value: 7, color: "cyan" },
+    { month: "May", value: 11, color: "violet" },
+    { month: "Jun", value: 16, color: "cyan" },
+  ],
+};
 
 export function LeaveDistributionChart() {
+  const [active, setActive] = useState<Dataset>("annual");
+  const bars = datasets[active];
+
   return (
     <div className="glass-panel flex h-[400px] flex-col rounded-xl p-6">
       <div className="mb-8 flex items-center justify-between">
@@ -31,12 +50,22 @@ export function LeaveDistributionChart() {
           </p>
         </div>
         <div className="flex gap-2">
-          <span className="rounded-full border border-accent-cyan/20 bg-accent-cyan/10 px-3 py-1 font-label-mono text-xs text-accent-cyan">
-            Annual
-          </span>
-          <span className="rounded-full border border-white/10 bg-surface-2 px-3 py-1 font-label-mono text-xs text-on-surface-variant">
-            Sick
-          </span>
+          {(["annual", "sick"] as const).map((key) => (
+            <button
+              key={key}
+              type="button"
+              aria-pressed={active === key}
+              onClick={() => setActive(key)}
+              className={cn(
+                "rounded-full border px-3 py-1 font-label-mono text-xs capitalize transition-colors",
+                active === key
+                  ? "border-accent-cyan/20 bg-accent-cyan/10 text-accent-cyan"
+                  : "border-white/10 bg-surface-2 text-on-surface-variant hover:text-on-surface"
+              )}
+            >
+              {key === "annual" ? "Annual" : "Sick"}
+            </button>
+          ))}
         </div>
       </div>
 
@@ -62,7 +91,7 @@ export function LeaveDistributionChart() {
             <div
               key={month}
               className={cn(
-                "group relative w-8 rounded-t-sm md:w-12",
+                "group relative w-8 rounded-t-sm transition-all duration-300 md:w-12",
                 color === "cyan" ? "chart-bar-cyan" : "chart-bar-violet"
               )}
               style={{ height: `${(value / AXIS_MAX) * 100}%` }}

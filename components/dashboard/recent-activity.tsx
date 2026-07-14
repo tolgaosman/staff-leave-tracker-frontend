@@ -1,12 +1,8 @@
-import {
-  CheckCheck,
-  MoreHorizontal,
-  TriangleAlert,
-  type LucideIcon,
-} from "lucide-react";
+import { CheckCheck, TriangleAlert, type LucideIcon } from "lucide-react";
 import type { ReactNode } from "react";
 
 import { Avatar } from "@/components/dashboard/avatar";
+import { CardMenu } from "@/components/dashboard/card-menu";
 import { cn } from "@/lib/utils";
 
 type Activity = {
@@ -74,13 +70,7 @@ export function RecentActivity() {
     <div className="glass-panel flex h-[400px] flex-col rounded-xl p-6">
       <div className="mb-6 flex items-center justify-between">
         <h3 className="text-2xl font-bold text-on-surface">Recent Activity</h3>
-        <button
-          type="button"
-          aria-label="More options"
-          className="text-on-surface-variant transition-colors hover:text-accent-cyan"
-        >
-          <MoreHorizontal className="size-5" />
-        </button>
+        <CardMenu />
       </div>
 
       <ul className="custom-scrollbar flex-1 space-y-4 overflow-y-auto pr-2">

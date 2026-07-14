@@ -1,4 +1,5 @@
 import { TrendingUp, type LucideIcon } from "lucide-react";
+import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -16,6 +17,8 @@ export type Stat = {
   caption?: string;
   /** label for the pill CTA (renders instead of trend/caption) */
   action?: string;
+  /** when set with `action`, the pill navigates here */
+  actionHref?: string;
   /** applies the glowing highlighted treatment (the "Pending" card) */
   highlight?: boolean;
 };
@@ -40,8 +43,11 @@ export function StatCard({
   trend,
   caption,
   action,
+  actionHref,
   highlight,
 }: Stat) {
+  const actionClasses =
+    "rounded-full border-white/20 bg-transparent font-label-mono text-xs text-on-surface hover:bg-white/10";
   return (
     <div
       className={cn(
@@ -84,13 +90,20 @@ export function StatCard({
 
       <div className="mt-auto">
         {action ? (
-          <Button
-            variant="outline"
-            size="sm"
-            className="rounded-full border-white/20 bg-transparent font-label-mono text-xs text-on-surface hover:bg-white/10"
-          >
-            {action}
-          </Button>
+          actionHref ? (
+            <Button
+              variant="outline"
+              size="sm"
+              className={actionClasses}
+              render={<Link href={actionHref} />}
+            >
+              {action}
+            </Button>
+          ) : (
+            <Button variant="outline" size="sm" className={actionClasses}>
+              {action}
+            </Button>
+          )
         ) : (
           <div className="flex items-center gap-2">
             {trend && (

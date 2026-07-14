@@ -17,16 +17,18 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 export const metadata: Metadata = {
   title: "İzin Takip Sistemi",
   description: "İzin Takip Sistemi",
   icons: {
     icon: [
-      { url: "/staff-leave-tracker-frontend/favicon.ico", type: "image/x-icon" },
-      { url: "/staff-leave-tracker-frontend/assets/browserLogo.png", type: "image/png" }
+      { url: `${basePath}/favicon.ico`, type: "image/x-icon" },
+      { url: `${basePath}/assets/browserLogo.png`, type: "image/png" },
     ],
-    shortcut: "/staff-leave-tracker-frontend/favicon.ico",
-    apple: "/staff-leave-tracker-frontend/assets/browserLogo.png",
+    shortcut: `${basePath}/favicon.ico`,
+    apple: `${basePath}/assets/browserLogo.png`,
   },
 };
 
