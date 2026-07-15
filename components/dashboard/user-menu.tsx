@@ -78,7 +78,7 @@ export function UserMenu() {
                   className={itemClasses}
                 >
                   <UserPlus className="size-4" />
-                  Kayıt Ol
+                  Hesap Oluştur
                 </Menu.Item>
               </div>
             )}
