@@ -174,14 +174,14 @@
   background-color: rgba(44, 51, 51, 0.05);
   position: relative;
   overflow: hidden;
-  
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    opacity: 0.15;
-    background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, #171e1e 5px, #171e1e 6px);
-  }
+}
+
+.chart-bar-cyan::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.15;
+  background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, #171e1e 5px, #171e1e 6px);
 }
 
 @utility chart-bar-violet {
@@ -191,28 +191,29 @@
   background-color: rgba(106, 93, 67, 0.05);
   position: relative;
   overflow: hidden;
-  
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    opacity: 0.15;
-    background-image: repeating-linear-gradient(-45deg, transparent, transparent 5px, #6a5d43 5px, #6a5d43 6px);
-  }
 }
 
-@utility custom-scrollbar {
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  &::-webkit-scrollbar-thumb {
-    background: rgba(23, 30, 30, 0.1);
-    border-radius: 9999px;
-  }
-  &::-webkit-scrollbar-thumb:hover {
-    background: rgba(23, 30, 30, 0.2);
-  }
+.chart-bar-violet::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.15;
+  background-image: repeating-linear-gradient(-45deg, transparent, transparent 5px, #6a5d43 5px, #6a5d43 6px);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(23, 30, 30, 0.1);
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(23, 30, 30, 0.2);
 }
