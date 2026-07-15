@@ -1,11 +1,12 @@
 "use client";
 
 import { Menu } from "@base-ui/react/menu";
-import { CheckCheck, Eye, MoreHorizontal } from "lucide-react";
+import { CalendarDays, MoreHorizontal, Users } from "lucide-react";
+import Link from "next/link";
 
 const items = [
-  { label: "Tümünü okundu işaretle", icon: CheckCheck },
-  { label: "Tüm etkinlikleri gör", icon: Eye },
+  { label: "Tüm izin taleplerini gör", icon: CalendarDays, href: "/leave-requests" },
+  { label: "Personel listesine git", icon: Users, href: "/personnel" },
 ];
 
 export function CardMenu() {
@@ -20,9 +21,10 @@ export function CardMenu() {
       <Menu.Portal>
         <Menu.Positioner sideOffset={8} align="end">
           <Menu.Popup className="glass-panel z-50 w-56 rounded-xl p-2 shadow-2xl outline-none transition-all data-[ending-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:scale-95 data-[starting-style]:opacity-0">
-            {items.map(({ label, icon: Icon }) => (
+            {items.map(({ label, icon: Icon, href }) => (
               <Menu.Item
                 key={label}
+                render={<Link href={href} />}
                 className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2 text-sm text-on-surface outline-none transition-colors data-[highlighted]:bg-white/5 data-[highlighted]:text-accent-cyan"
               >
                 <Icon className="size-4" />

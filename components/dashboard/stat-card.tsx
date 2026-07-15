@@ -1,7 +1,6 @@
-import { TrendingUp, type LucideIcon } from "lucide-react";
+import { type LucideIcon } from "lucide-react";
 import Link from "next/link";
 
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export type StatAccent = "cyan" | "violet" | "neutral";
@@ -23,112 +22,58 @@ export type Stat = {
   highlight?: boolean;
 };
 
-const accentText: Record<StatAccent, string> = {
-  cyan: "text-accent-cyan",
-  violet: "text-accent-violet",
-  neutral: "text-on-surface-variant",
-};
-
-const accentGlow: Record<StatAccent, string> = {
-  cyan: "bg-accent-cyan/10",
-  violet: "bg-accent-violet/10",
-  neutral: "bg-white/5",
-};
-
 export function StatCard({
   label,
   value,
   icon: Icon,
   accent,
-  trend,
   caption,
   action,
   actionHref,
   highlight,
 }: Stat) {
-  const actionClasses =
-    "rounded-full border-white/20 bg-transparent font-label-mono text-xs text-on-surface hover:bg-white/10";
   return (
     <div
       className={cn(
-        "glass-panel group relative flex h-48 flex-col justify-between overflow-hidden rounded-xl p-6",
-        highlight && "glow-cyan border-accent-cyan/30"
+        "glass-panel group relative flex h-[240px] flex-col justify-between overflow-hidden rounded-xl p-10 transition-all duration-300 hover:-translate-y-1",
+        highlight && "bg-surface-2"
       )}
     >
-      {highlight ? (
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-accent-cyan/5 to-transparent" />
-      ) : (
-        <div
-          className={cn(
-            "pointer-events-none absolute -mr-10 -mt-10 right-0 top-0 h-32 w-32 rounded-full blur-[40px] transition-transform duration-700 group-hover:scale-150",
-            accentGlow[accent]
-          )}
-        />
+      {/* Decorative sketchy background element for Global Force card */}
+      {accent === "cyan" && !highlight && (
+        <svg className="absolute bottom-0 right-0 opacity-10 pointer-events-none" height="120" viewBox="0 0 100 100" width="120">
+          <circle className="text-primary" cx="80" cy="80" fill="none" r="40" stroke="currentColor" strokeWidth="0.5"></circle>
+          <circle className="text-primary" cx="80" cy="80" fill="none" r="30" stroke="currentColor" strokeWidth="0.5"></circle>
+        </svg>
       )}
 
       <div>
-        <div
-          className={cn(
-            "mb-2 flex items-center gap-2",
-            highlight ? "text-accent-cyan" : accentText[accent]
-          )}
-        >
-          <Icon className="size-4" />
-          <span className="font-label-mono text-xs uppercase tracking-wider">
+        <div className="mb-2 flex items-center gap-2 text-secondary">
+          <Icon className="size-4 opacity-75" />
+          <span className="font-mono text-xs uppercase tracking-widest">
             {label}
           </span>
         </div>
         <div
           className={cn(
-            "text-6xl font-bold tracking-tight",
-            highlight ? "text-accent-cyan text-glow-cyan" : "text-on-surface"
+            "font-serif text-5xl font-bold tracking-tight mt-4",
+            highlight ? "text-destructive" : (accent === "cyan" ? "text-primary" : "text-secondary-container")
           )}
         >
-          {value}
+          {value.padStart(2, "0")}
         </div>
       </div>
 
-      <div className="mt-auto">
-        {action ? (
-          actionHref ? (
-            <Button
-              variant="outline"
-              size="sm"
-              className={actionClasses}
-              render={<Link href={actionHref} />}
-              nativeButton={false}
-            >
-              {action}
-            </Button>
-          ) : (
-            <Button variant="outline" size="sm" className={actionClasses}>
-              {action}
-            </Button>
-          )
-        ) : (
-          <div className="flex items-center gap-2">
-            {trend && (
-              <span
-                className={cn(
-                  "flex items-center gap-1 font-label-mono text-xs",
-                  accentText[accent]
-                )}
-              >
-                <TrendingUp className="size-4" />
-                {trend}
-              </span>
-            )}
-            {caption && (
-              <span
-                className={cn(
-                  "font-label-mono text-xs",
-                  trend ? "text-on-surface-variant/50" : accentText[accent]
-                )}
-              >
-                {caption}
-              </span>
-            )}
-          </div>
+      <div className="mt-auto flex justify-between items-end">
+        <div className="font-sans text-sm text-on-surface-variant">
+          {highlight ? "Pending Approval" : (caption || "Total Personnel")}
+        </div>
+
+        {action && actionHref && (
+          <Link href={actionHref} className="group/btn flex flex-col items-center font-mono text-xs text-primary font-bold">
+            <span>{action}</span>
+            <div className="h-[2px] w-0 bg-primary transition-all duration-300 group-hover/btn:w-full" />
+          </Link>
         )}
       </div>
     </div>

@@ -2,13 +2,10 @@
 
 import { Menu } from "@base-ui/react/menu";
 import { LogIn, LogOut, SlidersHorizontal, User, UserPlus } from "lucide-react";
-import { useRouter } from "next/navigation";
-
 import { useAuth } from "@/components/auth/auth-provider";
 import { Avatar } from "@/components/dashboard/avatar";
 
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 
 const popupClasses =
   "glass-panel z-50 rounded-xl p-2 shadow-2xl outline-none transition-all data-[ending-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:scale-95 data-[starting-style]:opacity-0";
@@ -18,30 +15,6 @@ const itemClasses =
 
 export function UserMenu() {
   const { user, logout } = useAuth();
-  const router = useRouter();
-
-  if (!user) {
-    return (
-      <div className="flex items-center gap-3">
-        <Button
-          variant="outline"
-          size="sm"
-          className="rounded-full border-white/20 text-on-surface hover:bg-white/10"
-          render={<Link href="/login" />}
-        >
-          Giriş Yap
-        </Button>
-        <Button
-          variant="default"
-          size="sm"
-          className="rounded-full bg-accent-cyan font-bold text-[#003739] hover:bg-accent-cyan/90"
-          render={<Link href="/signup" />}
-        >
-          Hesap Oluştur
-        </Button>
-      </div>
-    );
-  }
 
   return (
     <Menu.Root>
@@ -49,7 +22,13 @@ export function UserMenu() {
         aria-label="User menu"
         className="rounded-full outline-none transition-transform active:scale-95 data-[popup-open]:ring-2 data-[popup-open]:ring-accent-cyan/50"
       >
-        <Avatar name={user.name} className="size-10 border border-accent-cyan/30" />
+        {user ? (
+          <Avatar name={user.name} className="size-10 border border-accent-cyan/30" />
+        ) : (
+          <span className="flex size-10 items-center justify-center rounded-full border border-accent-cyan/30 bg-surface-2 text-on-surface-variant">
+            <User className="size-5" />
+          </span>
+        )}
       </Menu.Trigger>
 
       <Menu.Portal>
@@ -66,13 +45,17 @@ export function UserMenu() {
                   </p>
                 </div>
                 <div className="py-1">
-                  <Menu.Item className={itemClasses}>
-                    <User className="size-4" />
-                    Profil
+                  <Menu.Item className="p-0 outline-none">
+                    <Link href="/profile" className={itemClasses}>
+                      <User className="size-4" />
+                      Profil
+                    </Link>
                   </Menu.Item>
-                  <Menu.Item className={itemClasses}>
-                    <SlidersHorizontal className="size-4" />
-                    Ayarlar
+                  <Menu.Item className="p-0 outline-none">
+                    <Link href="/profile" className={itemClasses}>
+                      <SlidersHorizontal className="size-4" />
+                      Ayarlar
+                    </Link>
                   </Menu.Item>
                 </div>
                 <Menu.Separator className="my-1 h-px bg-white/10" />
@@ -86,19 +69,23 @@ export function UserMenu() {
               </>
             ) : (
               <div className="py-1">
-                <Menu.Item
-                  onClick={() => router.push("/login")}
-                  className={itemClasses}
-                >
-                  <LogIn className="size-4" />
-                  Giriş Yap
+                <Menu.Item className="p-0 outline-none">
+                  <Link
+                    href="/login"
+                    className="flex w-full cursor-pointer items-center gap-3 rounded-lg px-3 py-2 text-base text-on-surface outline-none transition-colors hover:bg-white/5 hover:text-accent-cyan"
+                  >
+                    <LogIn className="size-4" />
+                    Giriş Yap
+                  </Link>
                 </Menu.Item>
-                <Menu.Item
-                  onClick={() => router.push("/signup")}
-                  className={itemClasses}
-                >
-                  <UserPlus className="size-4" />
-                  Hesap Oluştur
+                <Menu.Item className="p-0 outline-none">
+                  <Link
+                    href="/signup"
+                    className="flex w-full cursor-pointer items-center gap-3 rounded-lg px-3 py-2 text-base text-on-surface outline-none transition-colors hover:bg-white/5 hover:text-accent-cyan"
+                  >
+                    <UserPlus className="size-4" />
+                    Hesap Oluştur
+                  </Link>
                 </Menu.Item>
               </div>
             )}

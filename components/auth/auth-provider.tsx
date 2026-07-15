@@ -68,6 +68,7 @@ type AuthContextValue = {
   login: (email: string, password?: string, name?: string) => void;
   signup: (name: string, email: string, password?: string) => void;
   logout: () => void;
+  updateUser: (patch: Partial<User>) => void;
 };
 
 const actions = {
@@ -76,6 +77,8 @@ const actions = {
   signup: (name: string, email: string) =>
     setUser({ name: name.trim() || nameFromEmail(email), email }),
   logout: () => setUser(null),
+  updateUser: (patch: Partial<User>) =>
+    setUser(currentUser ? { ...currentUser, ...patch } : currentUser),
 };
 
 const AuthContext = createContext<AuthContextValue | null>(null);

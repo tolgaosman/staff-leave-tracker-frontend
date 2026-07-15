@@ -15,7 +15,7 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed left-0 top-0 z-40 hidden h-screen w-64 flex-col border-r border-white/10 bg-surface-1/10 p-6 shadow-[0_0_40px_rgba(0,220,229,0.1)] backdrop-blur-xl md:flex">
+    <nav className="fixed left-0 top-0 z-40 hidden h-screen w-64 flex-col border-r border-outline-variant/30 bg-sidebar p-6 shadow-[40px_0_40px_0px_rgba(23,30,30,0.02)] md:flex">
       <div className="mb-10 mt-4 flex items-center gap-3 px-4">
         <img
           src="/assets/browserLogo.png"
@@ -23,13 +23,16 @@ export function Sidebar() {
           className="h-9 w-9 object-contain"
         />
         <div>
-          <h1 className="text-lg font-bold leading-tight text-on-surface">
-            İzin Takip Sistemi
+          <h1 className="font-serif text-lg font-bold leading-tight text-primary">
+            İzin Takip
           </h1>
+          <p className="font-mono text-[10px] uppercase tracking-widest text-secondary/70">
+            Sistemi
+          </p>
         </div>
       </div>
 
-      <div className="flex-1 space-y-2">
+      <div className="flex-1 space-y-4">
         {navItems.map(({ label, icon: Icon, href }) => {
           const active = isActive(pathname, href);
           return (
@@ -38,14 +41,14 @@ export function Sidebar() {
               href={href}
               aria-current={active ? "page" : undefined}
               className={cn(
-                "flex items-center gap-3 rounded-lg px-4 py-3 transition-all active:scale-95",
+                "flex items-center gap-3 py-2 transition-all active:scale-95",
                 active
-                  ? "border border-accent-cyan/30 bg-accent-cyan/15 text-accent-cyan shadow-[0_0_15px_rgba(0,220,229,0.2)]"
-                  : "text-on-surface-variant hover:bg-white/5 hover:text-on-surface"
+                  ? "text-primary font-bold border-b-2 border-primary"
+                  : "text-on-surface-variant opacity-70 hover:text-primary transition-colors"
               )}
             >
               <Icon className="size-5" />
-              <span className={cn("text-base", active && "font-bold")}>
+              <span className="font-sans text-base">
                 {label}
               </span>
             </Link>
@@ -53,7 +56,7 @@ export function Sidebar() {
         })}
       </div>
 
-      <div className="mt-auto pt-6">
+      <div className="mt-auto pt-6 border-t border-outline-variant/30">
         <NewRequestDialog />
       </div>
     </nav>
