@@ -1,6 +1,5 @@
 "use client";
 
-import { Briefcase } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -18,16 +17,15 @@ export function Sidebar() {
   return (
     <nav className="fixed left-0 top-0 z-40 hidden h-screen w-64 flex-col border-r border-white/10 bg-surface-1/10 p-6 shadow-[0_0_40px_rgba(0,220,229,0.1)] backdrop-blur-xl md:flex">
       <div className="mb-10 mt-4 flex items-center gap-3 px-4">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full border border-accent-cyan/30 bg-accent-cyan/20">
-          <Briefcase className="size-5 text-accent-cyan" />
-        </div>
+        <img
+          src="/assets/browserLogo.png"
+          alt="İzin Takip Sistemi Logo"
+          className="h-9 w-9 object-contain"
+        />
         <div>
-          <h1 className="text-2xl font-bold leading-tight text-on-surface">
-            Personnel Pro
+          <h1 className="text-lg font-bold leading-tight text-on-surface">
+            İzin Takip Sistemi
           </h1>
-          <p className="font-label-mono text-xs uppercase tracking-wider text-accent-cyan/70">
-            Admin Console
-          </p>
         </div>
       </div>
 

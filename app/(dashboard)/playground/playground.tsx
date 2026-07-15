@@ -25,7 +25,7 @@ export type LeaveReq = {
 // ==========================================
 // 3. ADIM: OLUŞTURDUĞUN TİPİ KULLANMA - TAMAMLANDI! 🎉
 // ==========================================
-const izinTalebi: LeaveReq = {
+export const izinTalebi: LeaveReq = {
   id: "012345",
   name: "Çiğdem Dürüst",
   startDate: "20 July",
@@ -50,9 +50,22 @@ function izinSuresiHesapla(talep: LeaveReq): number {
 // ==========================================
 // 5. ADIM: BASİT BİR REACT BİLEŞENİ VE STYLING
 // ==========================================
-interface MerhabaProps {
+
+export type MerhabaProps = {
   isim: string;
   yas?: number;
+};
+
+export function MerhabaKutusu({ isim, yas }: MerhabaProps) {
+  return (
+    <div>
+      <h2>Selam {isim} hoş geldin! </h2>
+      {yas && <p>Yaşınız: {yas}</p>}
+    </div>
+
+
+
+  )
 }
 
 export function MerhabaBileseni({ isim, yas }: MerhabaProps) {

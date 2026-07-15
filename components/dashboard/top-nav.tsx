@@ -5,7 +5,7 @@ import { Popover } from "@base-ui/react/popover";
 import { Bell, LogOut, Search, Settings, SlidersHorizontal, User } from "lucide-react";
 import { useState } from "react";
 
-import { Avatar } from "@/components/dashboard/avatar";
+import { UserMenu } from "@/components/dashboard/user-menu";
 
 type Notification = {
   id: number;
@@ -107,7 +107,7 @@ export function TopNav() {
           </Menu.Portal>
         </Menu.Root>
 
-        <Avatar name="Admin User" className="size-10 border border-accent-cyan/30" />
+        <UserMenu />
       </div>
     </header>
   );

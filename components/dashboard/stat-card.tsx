@@ -96,6 +96,7 @@ export function StatCard({
               size="sm"
               className={actionClasses}
               render={<Link href={actionHref} />}
+              nativeButton={false}
             >
               {action}
             </Button>

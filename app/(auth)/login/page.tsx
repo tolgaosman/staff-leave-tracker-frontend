@@ -1,0 +1,85 @@
+"use client";
+
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+
+import { useAuth } from "@/components/auth/auth-provider";
+import {
+  AuthCard,
+  authFieldClasses,
+  authLabelClasses,
+} from "@/components/auth/auth-card";
+import { Button } from "@/components/ui/button";
+
+export default function LoginPage() {
+  const router = useRouter();
+  const { login } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    login(email, password);
+    router.push("/");
+  }
+
+  return (
+    <AuthCard
+      title="Giriş Yap"
+      subtitle="Hesabınıza erişmek için giriş yapın."
+      footer={
+        <>
+          Hesabın yok mu?{" "}
+          <Link
+            href="/signup"
+            className="font-medium text-accent-cyan hover:underline"
+          >
+            Kayıt Ol
+          </Link>
+        </>
+      }
+    >
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="space-y-1.5">
+          <label htmlFor="email" className={authLabelClasses}>
+            E-posta
+          </label>
+          <input
+            id="email"
+            type="email"
+            required
+            autoComplete="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="ornek@sirket.com"
+            className={authFieldClasses}
+          />
+        </div>
+
+        <div className="space-y-1.5">
+          <label htmlFor="password" className={authLabelClasses}>
+            Şifre
+          </label>
+          <input
+            id="password"
+            type="password"
+            required
+            autoComplete="current-password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="••••••••"
+            className={authFieldClasses}
+          />
+        </div>
+
+        <Button
+          type="submit"
+          className="mt-2 h-auto w-full bg-accent-cyan py-3 text-base font-bold text-[#003739] hover:bg-accent-cyan/90"
+        >
+          Giriş Yap
+        </Button>
+      </form>
+    </AuthCard>
+  );
+}
