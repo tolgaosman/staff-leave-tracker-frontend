@@ -1,4 +1,5 @@
 import { AuthGuard } from "@/components/auth/auth-guard";
+import { Sidebar } from "@/components/dashboard/sidebar";
 import { TopNav } from "@/components/dashboard/top-nav";
 
 export default function DashboardLayout({
@@ -15,9 +16,10 @@ export default function DashboardLayout({
           <div className="absolute bottom-[-10%] right-[-10%] h-[40%] w-[40%] rounded-full bg-accent-cyan/20 blur-[100px]" />
         </div>
 
+        <Sidebar />
         <TopNav />
 
-        <main className="relative z-10 min-h-screen px-6 pb-24 pt-32 mx-auto max-w-[1200px]">
+        <main className="relative z-10 min-h-screen px-4 pb-10 pt-24 md:ml-64 md:px-10 md:pt-32">
           <div className="space-y-4">{children}</div>
         </main>
       </div>

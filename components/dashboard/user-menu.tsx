@@ -32,7 +32,7 @@ export function UserMenu() {
       </Menu.Trigger>
 
       <Menu.Portal>
-        <Menu.Positioner sideOffset={12} align="end">
+        <Menu.Positioner sideOffset={12} align="end" className="z-50">
           <Menu.Popup className={`${popupClasses} w-60`}>
             {user ? (
               <>

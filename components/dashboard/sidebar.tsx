@@ -18,7 +18,7 @@ export function Sidebar() {
     <nav className="fixed left-0 top-0 z-40 hidden h-screen w-64 flex-col border-r border-outline-variant/30 bg-sidebar p-6 shadow-[40px_0_40px_0px_rgba(23,30,30,0.02)] md:flex">
       <div className="mb-10 mt-4 flex items-center gap-3 px-4">
         <img
-          src="/assets/browserLogo.png"
+          src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/assets/browserLogo.png`}
           alt="İzin Takip Sistemi Logo"
           className="h-9 w-9 object-contain"
         />

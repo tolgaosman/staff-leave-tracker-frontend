@@ -4,11 +4,10 @@ import { Menu } from "@base-ui/react/menu";
 import { Popover } from "@base-ui/react/popover";
 import { Bell, LogOut, Settings, SlidersHorizontal, User } from "lucide-react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import { useAuth } from "@/components/auth/auth-provider";
 import { UserMenu } from "@/components/dashboard/user-menu";
-import { cn } from "@/lib/utils";
 
 type Notification = {
   id: number;
@@ -29,7 +28,6 @@ const popupClasses =
   "glass-panel z-50 rounded-xl p-2 shadow-2xl outline-none transition-all data-[ending-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:scale-95 data-[starting-style]:opacity-0";
 
 export function TopNav() {
-  const pathname = usePathname();
   const router = useRouter();
   const { logout } = useAuth();
 
@@ -40,65 +38,8 @@ export function TopNav() {
   ];
 
   return (
-    <header className="absolute left-0 right-0 top-0 z-30 hidden h-20 items-center justify-between px-6 md:px-16 mx-auto max-w-[1200px] border-b border-outline-variant/20 bg-transparent md:flex">
-      <div className="flex items-center gap-10">
-        <Link href="/" className="flex items-center gap-3 mr-4">
-          <img
-            src="/assets/browserLogo.png"
-            alt="İzin Takip Sistemi Logo"
-            className="h-8 w-8 object-contain"
-          />
-          <span className="font-serif text-lg font-bold text-primary">
-            İzin Takip
-          </span>
-        </Link>
-        <div className="flex items-center gap-6">
-          <Link
-            className={cn(
-              "font-sans text-base pb-1 transition-all",
-              pathname === "/"
-                ? "text-primary font-bold border-b-2 border-primary"
-                : "text-on-surface-variant hover:text-primary"
-            )}
-            href="/"
-          >
-            Genel Bakış
-          </Link>
-          <Link
-            className={cn(
-              "font-sans text-base pb-1 transition-all",
-              pathname === "/personnel"
-                ? "text-primary font-bold border-b-2 border-primary"
-                : "text-on-surface-variant hover:text-primary"
-            )}
-            href="/personnel"
-          >
-            Personel Listesi
-          </Link>
-          <Link
-            className={cn(
-              "font-sans text-base pb-1 transition-all",
-              pathname === "/leave-requests"
-                ? "text-primary font-bold border-b-2 border-primary"
-                : "text-on-surface-variant hover:text-primary"
-            )}
-            href="/leave-requests"
-          >
-            İzin Talepleri
-          </Link>
-          <Link
-            className={cn(
-              "font-sans text-base pb-1 transition-all",
-              pathname === "/playground"
-                ? "text-primary font-bold border-b-2 border-primary"
-                : "text-on-surface-variant hover:text-primary"
-            )}
-            href="/playground"
-          >
-            Playground
-          </Link>
-        </div>
-      </div>
+    <header className="absolute left-64 right-0 top-0 z-30 hidden h-20 items-center justify-between px-10 border-b border-outline-variant/20 bg-transparent md:flex">
+      <div />
 
       <div className="flex items-center gap-4">
         {/* Notifications */}
@@ -112,7 +53,7 @@ export function TopNav() {
             </span>
           </Popover.Trigger>
           <Popover.Portal>
-            <Popover.Positioner sideOffset={12} align="end">
+            <Popover.Positioner sideOffset={12} align="end" className="z-50">
               <Popover.Popup className={`${popupClasses} w-80`}>
                 <div className="border-b border-outline-variant/30 px-3 py-2">
                   <Popover.Title className="text-base font-bold text-on-surface">
@@ -153,7 +94,7 @@ export function TopNav() {
             <Settings className="size-5" />
           </Menu.Trigger>
           <Menu.Portal>
-            <Menu.Positioner sideOffset={12} align="end">
+            <Menu.Positioner sideOffset={12} align="end" className="z-50">
               <Menu.Popup className={`${popupClasses} w-52`}>
                 {settingsItems.map(({ label, icon: Icon, onClick }) => (
                   <Menu.Item
