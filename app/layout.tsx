@@ -17,7 +17,7 @@ const literata = Literata({
 const spaceMono = Space_Mono({
   variable: "--font-space-mono",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "700"],
 });
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
