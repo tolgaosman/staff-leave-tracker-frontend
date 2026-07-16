@@ -17,7 +17,7 @@ export function AuthCard({
   title: string;
   subtitle: string;
   children: ReactNode;
-  footer: ReactNode;
+  footer?: ReactNode;
 }) {
   return (
     <div className="glass-panel rounded-2xl p-8 shadow-2xl">
@@ -34,9 +34,11 @@ export function AuthCard({
 
       {children}
 
-      <div className="mt-6 text-center text-sm text-on-surface-variant">
-        {footer}
-      </div>
+      {footer && (
+        <div className="mt-6 text-center text-sm text-on-surface-variant">
+          {footer}
+        </div>
+      )}
     </div>
   );
 }

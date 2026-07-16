@@ -1,13 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, Trash2, Pencil } from "lucide-react";
+import { Plus, Trash2, Pencil, Eye } from "lucide-react";
 import { usePersonnel } from "@/lib/data/store";
 import { Personnel, personnelStatusLabels } from "@/lib/data/types";
 import { Avatar } from "@/components/dashboard/avatar";
 import { deletePersonnel } from "@/lib/data/store";
 import { ConfirmDialog } from "@/components/dashboard/confirm-dialog";
 import { PersonnelDialog } from "@/components/dashboard/personnel-dialog";
+import Link from "next/link";
 
 
 export default function PersonnelPage() {
@@ -93,6 +94,15 @@ export default function PersonnelPage() {
                       {/* 5. Sütun: Aksiyon Butonları */}
                       <td className="px-6 py-4">
                         <div className="flex items-center justify-end gap-2">
+
+                          <Link
+                            href={`/personnel/detail?id=${p.id}`}
+                            className="flex size-8 items-center justify-center rounded-lg border border-outline-variant/30 text-on-surface-variant transition-colors hover:bg-white hover:text-primary"
+                            title="Detay"
+                          >
+                            <Eye className="size-4" />
+                          </Link>
+
                           <button onClick={() => {
                             setEditing(p);
                             setDialogOpen(true);
