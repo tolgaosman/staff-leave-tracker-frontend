@@ -1,7 +1,7 @@
 "use client";
 
 import { Menu } from "@base-ui/react/menu";
-import { LogIn, LogOut, SlidersHorizontal, User, UserPlus } from "lucide-react";
+import { LogIn, LogOut, SlidersHorizontal, User } from "lucide-react";
 import { useAuth } from "@/components/auth/auth-provider";
 import { Avatar } from "@/components/dashboard/avatar";
 
@@ -76,15 +76,6 @@ export function UserMenu() {
                   >
                     <LogIn className="size-4" />
                     Giriş Yap
-                  </Link>
-                </Menu.Item>
-                <Menu.Item className="p-0 outline-none">
-                  <Link
-                    href="/signup"
-                    className="flex w-full cursor-pointer items-center gap-3 rounded-lg px-3 py-2 text-base text-on-surface outline-none transition-colors hover:bg-white/5 hover:text-accent-cyan"
-                  >
-                    <UserPlus className="size-4" />
-                    Hesap Oluştur
                   </Link>
                 </Menu.Item>
               </div>

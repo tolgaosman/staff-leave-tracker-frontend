@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -28,17 +27,6 @@ export default function LoginPage() {
     <AuthCard
       title="Giriş Yap"
       subtitle="Hesabınıza erişmek için giriş yapın."
-      footer={
-        <>
-          Hesabın yok mu?{" "}
-          <Link
-            href="/signup"
-            className="font-medium text-accent-cyan hover:underline"
-          >
-            Kayıt Ol
-          </Link>
-        </>
-      }
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-1.5">
