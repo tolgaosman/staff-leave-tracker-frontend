@@ -15,6 +15,7 @@ export function DashboardStats() {
       icon: Users,
       accent: "cyan",
       caption: "Kayıtlı Çalışan Sayısı",
+      valueColor: "dark:text-white",
     },
     {
       label: "BEKLEYEN TALEPLER",

@@ -2,6 +2,7 @@
 
 import { useMemo } from "react";
 import { Avatar } from "@/components/dashboard/avatar";
+import { AttachmentDialog } from "@/components/dashboard/attachment-dialog";
 import { usePersonnel, useLeaveRequests } from "@/lib/data/store";
 import { leaveTypeLabels } from "@/lib/data/types";
 import { workingDayCount } from "@/lib/date/business-days";
@@ -134,9 +135,21 @@ export function OnLeaveTable() {
                   </span>
                 </td>
                 <td className="px-6 py-4">
-                  <span className="inline-block rounded-full border border-outline-variant/30 px-3 py-1 font-mono text-[10px] font-semibold bg-surface-1 text-accent-cyan uppercase tracking-wider">
-                    {r.type}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="inline-block rounded-full border border-outline-variant/30 px-3 py-1 font-mono text-[10px] font-semibold bg-surface-1 text-accent-cyan uppercase tracking-wider">
+                      {r.type}
+                    </span>
+                    {r.attachmentUrl && (
+                      <AttachmentDialog url={r.attachmentUrl} name={r.attachmentName}>
+                        <span
+                          className="inline-flex items-center rounded-md border border-accent-cyan/30 bg-accent-cyan/10 px-2 py-0.5 text-[10px] font-bold text-accent-cyan hover:bg-accent-cyan/20 cursor-pointer"
+                          title="Doktor Raporunu Görüntüle"
+                        >
+                          Rapor
+                        </span>
+                      </AttachmentDialog>
+                    )}
+                  </div>
                 </td>
                 <td className="px-6 py-4 max-w-[220px] truncate text-on-surface-variant font-sans text-sm" title={r.note}>
                   {r.note}

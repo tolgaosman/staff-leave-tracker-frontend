@@ -77,7 +77,7 @@ export function RecentActivity() {
                 className="size-10 shrink-0 border border-outline-variant/30"
               />
               <div>
-                <p className="font-sans text-base leading-tight text-primary">
+                <p className="font-sans text-base leading-tight text-on-surface">
                   <span className="font-bold">{activity.actor}</span>{" "}
                   <span className="text-accent-cyan">
                     {leaveTypeLabels[activity.type]}

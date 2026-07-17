@@ -9,14 +9,6 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 export const metadata: Metadata = {
   title: "İzin Takip Sistemi",
   description: "İzin Takip Sistemi",
-  icons: {
-    icon: [
-      { url: `${basePath}/favicon.ico`, type: "image/x-icon" },
-      { url: `${basePath}/assets/browserLogo.png`, type: "image/png" },
-    ],
-    shortcut: `${basePath}/favicon.ico`,
-    apple: `${basePath}/assets/browserLogo.png`,
-  },
 };
 
 export default function RootLayout({

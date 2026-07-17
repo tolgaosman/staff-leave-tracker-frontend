@@ -112,7 +112,9 @@ export function LeaveDistributionChart() {
               key={`${month}-${i}`}
               className={cn(
                 "group relative w-8 rounded-t-sm transition-all duration-300 md:w-12",
-                color === "cyan" ? "chart-bar-cyan" : "chart-bar-violet"
+                color === "cyan" ? "chart-bar-cyan" : "chart-bar-violet",
+                "dark:!border-t dark:!border-l dark:!border-r dark:!border-[#ff99a8] dark:!bg-[#ff99a8]/30",
+                "dark:after:content-[''] dark:after:absolute dark:after:inset-0 dark:after:opacity-50 dark:after:bg-[repeating-linear-gradient(45deg,transparent,transparent_5px,#ff99a8_5px,#ff99a8_6px)]"
               )}
               style={{ height: `${(value / axisMax) * 100}%` }}
             >

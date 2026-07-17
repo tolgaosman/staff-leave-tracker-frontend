@@ -10,9 +10,9 @@ const base =
   "inline-flex items-center rounded-full border px-2.5 py-0.5 font-label-mono text-xs";
 
 const leaveStatusStyles: Record<LeaveStatus, string> = {
-  pending: "border-accent-violet/30 bg-accent-violet/10 text-accent-violet",
-  approved: "border-accent-cyan/30 bg-accent-cyan/10 text-accent-cyan",
-  rejected: "border-destructive/30 bg-destructive/10 text-destructive",
+  pending: "border-zinc-500/30 bg-zinc-500/10 text-zinc-700 dark:text-zinc-300",
+  approved: "border-green-500/30 bg-green-500/10 text-green-700 dark:text-green-400",
+  rejected: "border-red-500/30 bg-red-500/10 text-red-700 dark:text-red-400",
 };
 
 export function LeaveStatusBadge({ status }: { status: LeaveStatus }) {

@@ -63,12 +63,22 @@ function LeaveForm({
   const [start, setStart] = useState(leave?.startDate ?? "");
   const [end, setEnd] = useState(leave?.endDate ?? "");
   const [note, setNote] = useState(leave?.note ?? "");
+  const [attachmentName, setAttachmentName] = useState(leave?.attachmentName ?? "");
+  const [attachmentUrl, setAttachmentUrl] = useState(leave?.attachmentUrl ?? "");
 
   // Seçili aralığın İŞ GÜNÜ maliyeti + yıllık izinde kişinin kalan bakiyesi.
   // (Canlı bilgi + submit kontrolü için; getLeaveBalance daima tam veriyle çalışır.)
   const requestedDays = start && end ? workingDayCount(start, end) : 0;
   const balance =
     type === "annual" && personnelId ? getLeaveBalance(personnelId) : undefined;
+
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (file) {
+      setAttachmentName(file.name);
+      setAttachmentUrl(URL.createObjectURL(file));
+    }
+  }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -93,6 +103,8 @@ function LeaveForm({
       startDate: start,
       endDate: end,
       note: note.trim() || undefined,
+      attachmentName: attachmentName || undefined,
+      attachmentUrl: attachmentUrl || undefined,
     };
     if (leave) {
       updateLeaveRequest(leave.id, { ...data, status });
@@ -232,6 +244,29 @@ function LeaveForm({
                 </option>
               ))}
             </select>
+          </div>
+        )}
+        {type === "sick" && (
+          <div className="space-y-1.5">
+            <label htmlFor="l-file" className={labelClasses}>
+              Doktor Raporu <span className="text-destructive">*</span>
+            </label>
+            <input
+              id="l-file"
+              type="file"
+              required={!attachmentName}
+              accept=".pdf,image/*"
+              onChange={handleFileChange}
+              className={cn(
+                fieldClasses,
+                "file:mr-4 file:cursor-pointer file:rounded-md file:border-0 file:bg-accent-cyan/10 file:px-4 file:py-1 file:text-sm file:font-bold file:text-accent-cyan hover:file:bg-accent-cyan/20 p-1"
+              )}
+            />
+            {attachmentName && (
+              <p className="text-xs text-on-surface-variant">
+                Yüklü Dosya: {attachmentName}
+              </p>
+            )}
           </div>
         )}
 

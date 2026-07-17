@@ -44,41 +44,6 @@ export function TopNav() {
   const isAdmin = useIsAdmin();
   const me = useCurrentEmployee();
 
-  const notifications = useMemo(() => {
-    // Talep başına tek olay: bekleyen → talep, onay/red → karar. Onay/red
-    // karar zamanına göre sıralanır ki en son işlem en üstte "taze" görünsün.
-    const byId = new Map(personnel.map((p) => [p.id, p.name]));
-
-    // Çalışan yalnız kendi taleplerine ait bildirimleri görür (eşleşme yoksa hiç).
-    const scoped = isAdmin
-      ? requests
-      : me
-      ? requests.filter((r) => r.personnelId === me.id)
-      : [];
-
-    return scoped
-      .map((r) => {
-        const name = byId.get(r.personnelId) ?? "Bilinmeyen";
-        const type = leaveTypeLabels[r.type];
-        const eventIso =
-          r.status === "pending" ? r.createdAt : r.decidedAt ?? r.createdAt;
-        const title =
-          r.status === "approved"
-            ? `${name} için ${type} onaylandı`
-            : r.status === "rejected"
-            ? `${name} için ${type} reddedildi`
-            : `${name} ${type} talep etti`;
-        return {
-          id: `${r.id}-${r.status}`,
-          title,
-          time: relativeTime(eventIso),
-          sortTime: new Date(eventIso).getTime(),
-        };
-      })
-      .sort((a, b) => b.sortTime - a.sortTime)
-      .slice(0, 5);
-  }, [requests, personnel, isAdmin, me]);
-
   return (
     <header
       className={`absolute ${
@@ -92,9 +57,14 @@ export function TopNav() {
       ) : (
         <Link href="/" className="flex items-center gap-3 pl-4 transition-opacity hover:opacity-80">
           <img
-            src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/assets/browserLogo.png`}
+            src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/assets/logoLight.png`}
             alt="İzin Takip Sistemi Logo"
-            className="h-9 w-9 object-contain"
+            className="h-9 w-9 object-contain dark:hidden"
+          />
+          <img
+            src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/assets/logoDark.png`}
+            alt="İzin Takip Sistemi Logo"
+            className="hidden h-9 w-9 object-contain dark:block"
           />
           <div>
             <h1 className="font-serif text-lg font-bold leading-tight text-primary">
@@ -114,53 +84,7 @@ export function TopNav() {
 
         <ThemeToggle />
 
-        {/* Notifications */}
-        {isAdmin && (
-          <Popover.Root>
-            <Popover.Trigger aria-label="Notifications" className={iconButtonClasses}>
-              <span className="relative">
-                <Bell className="size-5" />
-                {notifications.length > 0 && (
-                  <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full bg-destructive" />
-                )}
-              </span>
-            </Popover.Trigger>
-            <Popover.Portal>
-              <Popover.Positioner sideOffset={12} align="end" className="z-50">
-                <Popover.Popup className={`${popupClasses} w-80`}>
-                  <div className="border-b border-outline-variant/30 px-3 py-2">
-                    <Popover.Title className="text-base font-bold text-on-surface">
-                      Bildirimler
-                    </Popover.Title>
-                  </div>
-                  {notifications.length === 0 ? (
-                    <p className="px-3 py-6 text-center text-sm text-on-surface-variant">
-                      Bekleyen bildirim yok
-                    </p>
-                  ) : (
-                    <ul className="py-1">
-                      {notifications.map((n) => (
-                        <li key={n.id}>
-                          <Link
-                            href="/leave-requests"
-                            className="block cursor-pointer rounded-lg px-3 py-2 transition-colors hover:bg-black/5"
-                          >
-                            <p className="text-sm leading-tight text-on-surface">
-                              {n.title}
-                            </p>
-                            <p className="mt-0.5 font-mono text-xs text-on-surface-variant/70">
-                              {n.time}
-                            </p>
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </Popover.Popup>
-              </Popover.Positioner>
-            </Popover.Portal>
-          </Popover.Root>
-        )}
+
 
         <UserMenu />
       </div>

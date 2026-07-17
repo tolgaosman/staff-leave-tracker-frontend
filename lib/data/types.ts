@@ -36,6 +36,8 @@ export type LeaveRequest = {
   /** ISO timestamp of the last approve/reject decision. Drives "fresh event"
       ordering in recent activity & notifications; unset while pending. */
   decidedAt?: string;
+  attachmentUrl?: string;
+  attachmentName?: string;
 };
 
 /* ── Turkish display labels (single source for the UI) ── */

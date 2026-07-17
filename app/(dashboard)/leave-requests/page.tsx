@@ -24,6 +24,7 @@ import { Avatar } from "@/components/dashboard/avatar";
 import { ConfirmDialog } from "@/components/dashboard/confirm-dialog";
 import { RejectDialog } from "@/components/dashboard/reject-dialog";
 import { LeaveDialog } from "@/components/dashboard/leave-dialog";
+import { AttachmentDialog } from "@/components/dashboard/attachment-dialog";
 import { LeaveStatusBadge } from "@/components/dashboard/badges";
 import { ExportButton } from "@/components/dashboard/export-button";
 
@@ -156,7 +157,7 @@ export default function LeaveRequestsPage() {
                 setEditing(null);
                 setDialogOpen(true);
               }}
-              className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-base font-bold text-white shadow transition-all hover:opacity-90 active:scale-95 cursor-pointer"
+              className="flex items-center gap-2 rounded-lg bg-accent-cyan px-4 py-2 text-base font-bold text-white dark:text-black shadow transition-all hover:opacity-90 active:scale-95 cursor-pointer"
             >
               <Plus className="size-5" />
               <span>Yeni İzin Talebi</span>
@@ -288,7 +289,19 @@ export default function LeaveRequestsPage() {
 
                             {/* İzin Türü */}
                             <td className="px-6 py-4 font-medium text-primary">
-                              {leaveTypeLabels[r.type]}
+                              <div className="flex items-center gap-2">
+                                <span>{leaveTypeLabels[r.type]}</span>
+                                {r.attachmentUrl && (
+                                  <AttachmentDialog url={r.attachmentUrl} name={r.attachmentName}>
+                                    <span
+                                      className="inline-flex items-center rounded-md border border-accent-cyan/30 bg-accent-cyan/10 px-2 py-0.5 text-[10px] font-bold text-accent-cyan hover:bg-accent-cyan/20"
+                                      title="Doktor Raporunu Görüntüle"
+                                    >
+                                      Rapor
+                                    </span>
+                                  </AttachmentDialog>
+                                )}
+                              </div>
                             </td>
 
                             {/* Tarih Aralığı */}
