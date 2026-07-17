@@ -66,6 +66,8 @@ export function OnLeaveTable() {
           endDate: fmt(leave.endDate),
           rawStart: leave.startDate,
           daysLeft: workingDayCount(today, leave.endDate),
+          attachmentUrl: leave.attachmentUrl,
+          attachmentName: leave.attachmentName,
         };
       })
       // Önce aktif olanlar, sonra başlangıç tarihine göre.
