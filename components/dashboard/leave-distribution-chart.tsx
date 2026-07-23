@@ -190,12 +190,13 @@ export function LeaveDistributionChart() {
       </div>
 
       {/* Recharts bar chart */}
-      <div className="flex-1 min-h-0">
+      <div className="flex-1 min-h-0 select-none outline-none [-webkit-tap-highlight-color:transparent] [&_*]:outline-none [&_*]:[-webkit-tap-highlight-color:transparent]">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={data}
             margin={{ top: 4, right: 4, left: -20, bottom: 0 }}
             barCategoryGap="25%"
+            accessibilityLayer={false}
           >
             <defs>
               <linearGradient id="barGradPrimary" x1="0" y1="0" x2="0" y2="1">
@@ -238,7 +239,7 @@ export function LeaveDistributionChart() {
             />
             <Tooltip
               content={<CustomTooltip colors={c} />}
-              cursor={{ fill: c.cursorFill, radius: 6 }}
+              cursor={false}
             />
             <Bar
               dataKey="value"
