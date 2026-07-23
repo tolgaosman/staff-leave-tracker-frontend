@@ -1,3 +1,6 @@
+import { AuthBackdrop } from "@/components/auth/auth-backdrop";
+import { AuthBrandPanel } from "@/components/auth/auth-brand-panel";
+
 export default function AuthLayout({
   children,
 }: {
@@ -5,13 +8,12 @@ export default function AuthLayout({
 }) {
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-x-hidden bg-background px-4 py-10 text-on-surface">
-      {/* Ambient background lighting */}
-      <div className="pointer-events-none fixed inset-0 z-0 opacity-30">
-        <div className="absolute left-[-10%] top-[-10%] h-[50%] w-[50%] rounded-full bg-accent-violet/20 blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] h-[40%] w-[40%] rounded-full bg-accent-cyan/20 blur-[100px]" />
-      </div>
+      <AuthBackdrop />
 
-      <div className="relative z-10 w-full max-w-md">{children}</div>
+      <div className="relative z-10 grid w-full max-w-4xl gap-10 lg:grid-cols-[1fr_minmax(0,26rem)] lg:items-center">
+        <AuthBrandPanel />
+        <div className="mx-auto w-full max-w-md">{children}</div>
+      </div>
     </div>
   );
 }

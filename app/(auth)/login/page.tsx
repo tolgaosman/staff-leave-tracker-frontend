@@ -30,6 +30,7 @@ export default function LoginPage() {
     <AuthCard
       title="Giriş Yap"
       subtitle="Hesabınıza erişmek için giriş yapın."
+      footer="Demo ortamı — herhangi bir e-posta ile giriş yapabilirsiniz."
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-1.5">
